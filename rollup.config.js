@@ -5,9 +5,10 @@ import babel from "@rollup/plugin-babel";
 export default {
   input: "./lib/index.ts",
   output: {
-    file: "./dist/main.js",
+    file: "./dist/index.js",
     format: "esm",
   },
+
   plugins: [
     resolve(),
     commonjs(),
