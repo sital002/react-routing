@@ -1,0 +1,27 @@
+{
+  "name": "@prop_c/react-routing",
+  "description": "A simple routing for react",
+  "type": "module",
+  "main": "./dist/main.js",
+  "module": "./dist/main.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "rollup": "^4.9.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.3.3"
+  }
+}
