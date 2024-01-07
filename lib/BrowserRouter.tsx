@@ -1,6 +1,12 @@
 import React from "react";
 import Routes from "./Routes";
 
+
+interface RouteProps {
+  path: string,
+  element: React.ReactElement,
+  index?: boolean
+}
 interface RouterContextProps {
   selectedComponent: React.ReactNode;
   setSelectedComponent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
@@ -15,7 +21,7 @@ function findElement(path: string, allRoutes: { path: string, element: React.Rea
 }
 export default function BrowserRouter({ children }: { children: React.ReactElement | React.ReactElement[] }) {
   const [selectedComponent, setSelectedComponent] = React.useState<React.ReactNode | null>(null);
-  const allRoutes: { path: string, element: React.ReactElement, index?: boolean }[] = []
+  const allRoutes: RouteProps[] = []
 
   React.useEffect(() => {
     const handlePopstate = () => {
@@ -39,8 +45,8 @@ export default function BrowserRouter({ children }: { children: React.ReactEleme
     });
     if (filteredChildren.length <= 0) console.warn("No Routes element is provided")
     if (filteredChildren.length > 1) throw new Error("Cannot use more than one Routes component inside BrowserRouter")
-    const routes: any = filteredChildren[0].props
-    routes.children.forEach((item: any) => {
+    const routes = filteredChildren[0] as React.ReactElement
+    routes.props.children.forEach((item: React.ReactElement) => {
       allRoutes.push({
         path: item.props.path,
         element: item.props.element
