@@ -41,7 +41,10 @@ export default function BrowserRouter({
 
   React.useEffect(() => {
     const handlePopstate = () => {
-      const path = window.location.pathname;
+      let path = window.location.pathname;
+      if (path.length > 1) {
+        path = path.endsWith("/") ? path.slice(0, path.length - 1) : path;
+      }
       const initialElement = findElement(path, ROUTES);
       if (!initialElement)
         return console.warn(
@@ -79,7 +82,10 @@ export default function BrowserRouter({
         ROUTES.STATIC[item.props.path] = item.props;
       }
     });
-    const path = window.location.pathname;
+    let path = window.location.pathname;
+    if (path.length > 1) {
+      path = path.endsWith("/") ? path.slice(0, path.length - 1) : path;
+    }
     const initialElement = findElement(path, ROUTES);
     if (!initialElement)
       return console.warn(
