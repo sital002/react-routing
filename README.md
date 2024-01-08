@@ -1,10 +1,10 @@
-### A simple and light weight routing library for react.
+# A simple and light weight routing library for react
 
 ```bash
 npm i @sital002/react-routing
 ```
 
-### How to implement it
+## How to implement it
 
 App.jsx
 

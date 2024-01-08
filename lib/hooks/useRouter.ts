@@ -9,6 +9,7 @@ function useRouter() {
   const router = {
     push: (path: string) => {
       if (typeof path !== "string") throw new Error("Path must be string");
+      if (window.location.pathname === path) return;
       window.history.pushState(path, path, path);
       window.dispatchEvent(new Event("popstate"));
     },
