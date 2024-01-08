@@ -1,5 +1,13 @@
 import React from "react";
 
-export default function Route() {
-  return <div>Route</div>;
+interface RouteProps {
+  children: React.ReactElement;
+  path: string;
+  index?: boolean;
+  element: React.ReactElement;
 }
+const Route: React.FC<RouteProps> = (props) => {
+  return <>{props.children}</>;
+};
+
+export default Route;

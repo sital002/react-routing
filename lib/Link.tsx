@@ -1,9 +1,9 @@
 import React from "react";
-
 interface LinkProps extends React.ReactHTMLElement<HTMLAnchorElement> {
   to: string;
   children: React.ReactNode;
 }
+
 const Link: React.FC<LinkProps> = ({ to, children }) => {
   return (
     <a

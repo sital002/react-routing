@@ -16,7 +16,7 @@ const Routes: React.FC<RoutesProps> = ({ children }) => {
         throw new Error("Routes can only have Route as children");
     });
   }, []);
-  return <div>{context.selectedComponent}</div>;
+  return <>{context.selectedComponent}</>;
 };
 
 export default Routes;

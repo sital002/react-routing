@@ -10,16 +10,26 @@ interface RouterContextProps {
   selectedComponent: React.ReactNode;
   setSelectedComponent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
 }
+
+interface ROUTESProps {
+  STATIC: Record<string, RouteProps>;
+  DYNAMIC: Record<string, RouteProps>;
+}
 export const RouterContext = React.createContext<RouterContextProps | null>(
   null
 );
 
-function findElement(
-  path: string,
-  allRoutes: { path: string; element: React.ReactElement; index?: boolean }[]
-) {
-  const initialElement = allRoutes.find((item) => item.path === path)?.element;
-  return initialElement;
+const ROUTES: ROUTESProps = {
+  STATIC: {},
+  DYNAMIC: {},
+};
+function findElement(path: string, allRoutes: ROUTESProps) {
+  if (allRoutes.STATIC[path]) return allRoutes.STATIC[path].element;
+  for (let key in allRoutes.DYNAMIC) {
+    if (path.includes(key)) {
+      return allRoutes.DYNAMIC[key].element;
+    }
+  }
 }
 export default function BrowserRouter({
   children,
@@ -28,15 +38,11 @@ export default function BrowserRouter({
 }) {
   const [selectedComponent, setSelectedComponent] =
     React.useState<React.ReactNode | null>(null);
-  const allRoutes: RouteProps[] = [];
 
   React.useEffect(() => {
     const handlePopstate = () => {
-      const path = window.location.pathname.match(/\/\w+/g)?.[0];
-      const initialElement = findElement(
-        path || window.location.pathname,
-        allRoutes
-      );
+      const path = window.location.pathname;
+      const initialElement = findElement(path, ROUTES);
       if (!initialElement)
         return console.warn(
           "404 cannot find the route",
@@ -50,6 +56,7 @@ export default function BrowserRouter({
     };
   }, []);
 
+  // Initial Render
   React.useEffect(() => {
     const filteredChildren = React.Children.map(children, (child) => {
       if (React.isValidElement(child) && child.type === Routes) {
@@ -65,16 +72,15 @@ export default function BrowserRouter({
       );
     const routes = filteredChildren[0] as React.ReactElement;
     routes.props.children.forEach((item: React.ReactElement) => {
-      allRoutes.push({
-        path: item.props.path,
-        element: item.props.element,
-      });
+      if (item.props.path.includes(":")) {
+        const newPath = item.props.path.split(":")?.[0];
+        ROUTES.DYNAMIC[newPath] = item.props;
+      } else {
+        ROUTES.STATIC[item.props.path] = item.props;
+      }
     });
-    const path = window.location.pathname.match(/\/\w+/g)?.[0];
-    const initialElement = findElement(
-      path || window.location.pathname,
-      allRoutes
-    );
+    const path = window.location.pathname;
+    const initialElement = findElement(path, ROUTES);
     if (!initialElement)
       return console.warn(
         "404 cannot find the route",

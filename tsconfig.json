@@ -3,7 +3,8 @@
     "target": "es5",
     "lib": ["dom", "es2015"],
     "jsx": "react",
-    "module": "esnext", // Updated module option
+    "module": "esnext",
+    "importHelpers": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
