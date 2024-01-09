@@ -1,7 +1,7 @@
-function matchPath(url: string, path: string, route: React.ReactElement) {
+function matchPath(url: string, path: string, route?: React.ReactElement) {
   const urlSegments = url.split("/").filter((segment) => segment !== "");
   const pathSegments = path.split("/").filter((segment) => segment !== "");
-  if (route.props?.children) {
+  if (route?.props?.children) {
     for (let i = 0; i < pathSegments.length; i++) {
       const pathSegment = pathSegments[i];
       const urlSegment = urlSegments[i];

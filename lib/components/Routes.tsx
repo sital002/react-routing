@@ -55,7 +55,7 @@ const Routes: React.FC<RoutesProps> = ({ children }) => {
     return (
       <>
         {currentElement?.props.element}
-        {currentElement?.props.children}
+        {currentElement}
       </>
     );
   }
