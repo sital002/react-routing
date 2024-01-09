@@ -1,5 +1,5 @@
 {
-  "name": "@prop_c/react-routing",
+  "name": "@sital002/react-routing",
   "description": "A simple routing for react",
   "type": "module",
   "main": "./dist/index.js",

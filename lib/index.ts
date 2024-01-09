@@ -1,7 +1,8 @@
-import BrowserRouter from "./BrowserRouter";
-import Routes from "./Routes";
-import Route from "./Route";
-import Link from "./Link";
+import BrowserRouter from "./components/BrowserRouter";
+import Routes from "./components/Routes";
+import Route from "./components/Route";
+import Link from "./components/Link";
+import Outlet from "./components/Outlet";
 import useRouter from "./hooks/useRouter";
 
-export { BrowserRouter, Routes, Route, Link, useRouter };
+export { BrowserRouter, Routes, Route, Link, useRouter, Outlet };
