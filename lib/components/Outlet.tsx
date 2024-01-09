@@ -10,7 +10,7 @@ const Outlet: React.FC<OutletProps> = ({ children }) => {
   if (context === null)
     throw new Error("Outlet must be used within BrowserRouter");
 
-  console.log(context.currentOutletElement);
+  // console.log(context.currentOutletElement);
   return <>{context.currentOutletElement}</>;
 };
 
