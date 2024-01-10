@@ -1,5 +1,6 @@
 {
   "name": "@sital002/react-routing",
+  "version": "0.0.02",
   "description": "A simple routing for react",
   "type": "module",
   "main": "./dist/index.js",

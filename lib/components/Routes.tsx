@@ -49,7 +49,12 @@ const Routes: React.FC<RoutesProps> = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    setCurrentElement(findMatchingRoute(context.currentPath));
+    const matchedElement = findMatchingRoute(context.currentPath);
+    if (!matchedElement) {
+      console.warn("404 route not found for ", context.currentPath);
+    } else {
+      setCurrentElement(matchedElement);
+    }
   }, [context.currentPath]);
   if (currentElement?.props?.children?.length >= 1) {
     return (
@@ -58,8 +63,9 @@ const Routes: React.FC<RoutesProps> = ({ children }) => {
         {currentElement}
       </>
     );
-  }
-  return currentElement?.props.element;
+  } else if (currentElement?.props.element)
+    return currentElement?.props.element;
+  return null;
 };
 
 export default Routes;
