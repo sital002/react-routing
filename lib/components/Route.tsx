@@ -1,7 +1,6 @@
 import React from "react";
 import { RouterContext } from "./BrowserRouter";
 import matchPath from "../utils/matchPath";
-// import matchPath from "../utils/matchPath";
 
 export interface RouteProps {
   children: React.ReactElement;
